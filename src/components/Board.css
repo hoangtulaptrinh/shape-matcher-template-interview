@@ -4,3 +4,14 @@
   grid-template-columns: repeat(4, 200px);
   border: 1px solid #ccc;
 }
+
+.win {
+  border: none;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 50px;
+  color: greenyellow;
+}

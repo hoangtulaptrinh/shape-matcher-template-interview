@@ -87,22 +87,29 @@ const Board: React.FC = () => {
 
   console.log("boardsDone", boardsDone);
 
+  const isWin =
+    boardsDone.filter((item) => typeof item === "number").length === 16;
+
   return (
     <div className="board">
       {/* Render each cell in the board */}
 
-      <div className="grid">
-        {boards.map((item: CellTypes, index: number) => (
-          <Cell
-            item={item}
-            indexCell={index}
-            cellSelectedOne={cellSelectedOne}
-            cellSelectedTwo={cellSelectedTwo}
-            setCellSelectedOne={setCellSelectedOne}
-            setCellSelectedTwo={setCellSelectedTwo}
-            boardsDone={boardsDone}
-          />
-        ))}
+      <div className={`grid ${isWin ? "win" : ""}`}>
+        <>
+          {isWin
+            ? "You Win"
+            : boards.map((item: CellTypes, index: number) => (
+                <Cell
+                  item={item}
+                  indexCell={index}
+                  cellSelectedOne={cellSelectedOne}
+                  cellSelectedTwo={cellSelectedTwo}
+                  setCellSelectedOne={setCellSelectedOne}
+                  setCellSelectedTwo={setCellSelectedTwo}
+                  boardsDone={boardsDone}
+                />
+              ))}
+        </>
       </div>
     </div>
   );
