@@ -33,10 +33,8 @@ function shuffle(array: Array<CellTypes>) {
 const Board: React.FC = () => {
   // states...
   const [boards, setBoards] = useState<Array<CellTypes>>(Array(16));
-  const [currentStatus, setCurrentStatus] = useState<CellTypes>({
-    shape: "circle",
-    color: "red",
-  });
+  const [cellSelectedOne, setCellSelectedOne] = useState<number | null>(null);
+  const [cellSelectedTwo, setCellSelectedTwo] = useState<number | null>(null);
 
   useEffect(() => {
     // Initialize the game board with random shapes and colors
@@ -63,16 +61,19 @@ const Board: React.FC = () => {
     setBoards(shuffleRandomSixTeenShapeColorCell);
   }, []);
 
-  const handleCellClick = (index: number) => {
-    // Reveal cell, check for matches, update game state, and handle game completion
-  };
-
   return (
     <div className="board">
       {/* Render each cell in the board */}
       <div className="grid">
-        {boards.map((item: CellTypes) => (
-          <Cell item={item} />
+        {boards.map((item: CellTypes, index: number) => (
+          <Cell
+            item={item}
+            indexCell={index}
+            cellSelectedOne={cellSelectedOne}
+            cellSelectedTwo={cellSelectedTwo}
+            setCellSelectedOne={setCellSelectedOne}
+            setCellSelectedTwo={setCellSelectedTwo}
+          />
         ))}
       </div>
     </div>
