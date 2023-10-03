@@ -1,0 +1,44 @@
+.child {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 200px;
+  background-color: #ccc;
+}
+
+.red {
+  background-color: red;
+  border-bottom: 100px solid red;
+}
+
+.green {
+  background-color: green;
+  border-bottom: 100px solid green;
+}
+
+.blue {
+  background-color: blue;
+  border-bottom: 100px solid blue;
+}
+
+.square {
+  height: 100px;
+  width: 100px;
+  border-bottom: none;
+}
+
+.circle {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  border-bottom: none;
+}
+
+.triangle {
+  width: 0;
+  height: 0;
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+  background-color: unset;
+}

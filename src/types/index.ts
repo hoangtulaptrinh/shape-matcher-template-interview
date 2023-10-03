@@ -1,2 +1,6 @@
 // your types here
-export {}
+
+export interface CellTypes {
+  color?: string;
+  shape?: string;
+}
