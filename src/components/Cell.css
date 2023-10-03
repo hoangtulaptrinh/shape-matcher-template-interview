@@ -51,3 +51,11 @@
 .no-selected > div {
   display: none;
 }
+
+.done {
+  background-color: transparent;
+}
+
+.done > div {
+  display: none;
+}

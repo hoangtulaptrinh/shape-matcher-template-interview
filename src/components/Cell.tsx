@@ -11,6 +11,7 @@ interface CellProps {
   cellSelectedTwo: number | null;
   setCellSelectedOne: Function;
   setCellSelectedTwo: Function;
+  boardsDone: number[];
 }
 
 const Cell: React.FC<CellProps> = ({
@@ -20,11 +21,20 @@ const Cell: React.FC<CellProps> = ({
   cellSelectedTwo,
   setCellSelectedOne,
   setCellSelectedTwo,
+  boardsDone,
 }) => {
   // Render cell with shape and color, use CSS to style based on shape and color.
   return (
     <div
       onClick={() => {
+        if (boardsDone.includes(indexCell)) {
+          return;
+        }
+
+        if (cellSelectedOne !== null && cellSelectedTwo !== null) {
+          return;
+        }
+
         if (cellSelectedOne === null) {
           setCellSelectedOne(indexCell);
           return;
@@ -36,7 +46,8 @@ const Cell: React.FC<CellProps> = ({
         indexCell === cellSelectedOne || indexCell === cellSelectedTwo
           ? "selected"
           : "no-selected"
-      } child`}
+      }
+      ${boardsDone.includes(indexCell) ? "done" : ""} child`}
     >
       <div className={`${item?.shape} ${item?.color}`} />
     </div>

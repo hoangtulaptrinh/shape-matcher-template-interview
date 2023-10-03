@@ -33,6 +33,7 @@ function shuffle(array: Array<CellTypes>) {
 const Board: React.FC = () => {
   // states...
   const [boards, setBoards] = useState<Array<CellTypes>>(Array(16));
+  const [boardsDone, setBoardsDone] = useState<Array<number>>(Array(16));
   const [cellSelectedOne, setCellSelectedOne] = useState<number | null>(null);
   const [cellSelectedTwo, setCellSelectedTwo] = useState<number | null>(null);
 
@@ -61,9 +62,35 @@ const Board: React.FC = () => {
     setBoards(shuffleRandomSixTeenShapeColorCell);
   }, []);
 
+  React.useEffect(() => {
+    const timer = window.setTimeout(() => {
+      console.log("1 second has passed");
+      if (cellSelectedOne === null || cellSelectedTwo === null) return;
+
+      if (
+        boards[cellSelectedOne].shape !== boards[cellSelectedTwo].shape ||
+        boards[cellSelectedOne].color !== boards[cellSelectedTwo].color
+      ) {
+        setCellSelectedOne(null);
+        setCellSelectedTwo(null);
+      } else {
+        setCellSelectedOne(null);
+        setCellSelectedTwo(null);
+        setBoardsDone([...boardsDone, cellSelectedOne, cellSelectedTwo]);
+      }
+    }, 1000);
+
+    return () => {
+      window.clearTimeout(timer);
+    };
+  }, [cellSelectedOne, cellSelectedTwo]); // Pass in empty array to run useEffect only on mount.
+
+  console.log("boardsDone", boardsDone);
+
   return (
     <div className="board">
       {/* Render each cell in the board */}
+
       <div className="grid">
         {boards.map((item: CellTypes, index: number) => (
           <Cell
@@ -73,6 +100,7 @@ const Board: React.FC = () => {
             cellSelectedTwo={cellSelectedTwo}
             setCellSelectedOne={setCellSelectedOne}
             setCellSelectedTwo={setCellSelectedTwo}
+            boardsDone={boardsDone}
           />
         ))}
       </div>
